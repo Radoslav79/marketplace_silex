@@ -2,7 +2,7 @@
 require_once("inc/init.inc.php");
 //--------------------------------- TRAITEMENTS PHP ---------------------------------//
 if(isset($_GET['id_template']))  { $resultat = executeRequete("SELECT * FROM template WHERE id_template = '$_GET[id_template]'"); }
-if($resultat->num_rows <= 0) { header("location:boutique.php"); exit(); }
+if($resultat->num_rows <= 0) { header("location:marketplace.php"); exit(); }
  
 $template = $resultat->fetch_assoc();
 $contenu .= "<h2>Titre : $template[titre]</h2><hr><br>";

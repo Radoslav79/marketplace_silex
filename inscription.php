@@ -4,9 +4,9 @@ if($_POST)
 {
     debug($_POST);
     $verif_caractere = preg_match('#^[a-zA-Z0-9._-]+$#', $_POST['pseudo']); 
-    if(!$verif_caractere && (strlen($_POST['pseudo']) < 1 || strlen($_POST['pseudo']) > 20) ) // 
+    if(!$verif_caractere && (strlen($_POST['pseudo']) < 1 || strlen($_POST['pseudo']) > 255) )
     {
-        $contenu .= "<div class='erreur'>Le pseudo doit contenir entre 1 et 20 caractères. <br> Caractère accepté : Lettre de A à Z et chiffre de 0 à 9</div>";
+        $contenu .= "<div class='erreur'>Le pseudo doit contenir entre 1 et 255 caractères. <br> Caractère accepté : Lettre de A à Z et chiffre de 0 à 9</div>";
     }
     else
     {
@@ -23,7 +23,7 @@ if($_POST)
                 $_POST[$indice] = htmlEntities(addSlashes($valeur));
             }
             executeRequete("INSERT INTO membre (pseudo, mdp, nom, prenom, email, civilite, ville, code_postal, adresse) VALUES ('$_POST[pseudo]', '$_POST[mdp]', '$_POST[nom]', '$_POST[prenom]', '$_POST[email]', '$_POST[civilite]', '$_POST[ville]', '$_POST[code_postal]', '$_POST[adresse]')");
-            $contenu .= "<div class='validation'>Vous êtes inscrit à notre site web. <a href=\"connexion.php\"><u>Cliquez ici pour vous connecter</u></a></div>";
+            $contenu .= "<div class='validation'>Vous êtes inscrit à notre Marketplace. <a href=\"connexion.php\"><u>Cliquez ici pour vous connecter</u></a></div>";
         }
     }
 }
