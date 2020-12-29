@@ -3,10 +3,13 @@ require_once("inc/init.inc.php");
 //--------------------------------- TRAITEMENTS PHP ---------------------------------//
 //--- AJOUT COMMANDE ---//
 if(isset($_POST['ajout_commande'])) 
-{   // debug($_POST);
+{   //debug($_POST);
     $resultat = executeRequete("SELECT * FROM template WHERE id_template='$_POST[id_template]'");
     $template = $resultat->fetch_assoc();
-    ajouterTemplaeDansCommande($template['titre'],$_POST['id_template'],$_POST['auteur'],$template['description']);
+    $_SESSION['commande']['titre'][] = $template['titre'];
+    $_SESSION['commande']['auteur'][] = $template['auteur'];
+    $_SESSION['commande']['id_template'][] =$_POST['id_template'];
+    $_SESSION['commande']['description'][] = $template['description'];
 }
 //--- VIDER COMANDE ---//
 if(isset($_GET['action']) && $_GET['action'] == "vider")
@@ -19,10 +22,15 @@ if(isset($_POST['commander']))
     
     if(!isset($erreur))
     {
-        executeRequete("INSERT INTO commande (id_template, auteur, date_enregistrement) VALUES (" . $_SESSION['membre']['id_membre'] . "," . commandeTotal() . ", NOW())");
+        $date=new DateTime("now");
+
+$id_membre=$_SESSION['membre']['id_membre'];
+$date= new DateTime("now");
+$datenow=$date->format('Y/m/d');
+
+executeRequete("INSERT INTO commande (id_membre, date_enregistrement) VALUES (".$id_membre.",".$datenow.")");
         $id_commande = $mysqli->insert_id;
         unset($_SESSION['commande']);
-        mail($_SESSION['membre']['email'], "confirmation de la commande", "Merci votre n° de suivi est le $id_commande", "From:auteur@dp_marketplace.com");
         $contenu .= "<div class='validation'>Merci pour votre commande. votre n° de suivi est le $id_commande</div>";
     }
 }

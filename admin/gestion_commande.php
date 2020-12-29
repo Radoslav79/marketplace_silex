@@ -48,6 +48,14 @@ if(isset($_GET['action']) && $_GET['action'] == "affichage")
     }
     $contenu .= '</table><br><hr><br>';
 }
+//--- SUPPRESSION COMMANDE ---//
+if(isset($_GET['action']) && $_GET['action'] == "suppression")
+{   // $contenu .= $_GET['id_produit']
+    $resultat = executeRequete("SELECT * FROM commande WHERE id_commande=$_GET[id_commande]");
+    $commande_a_supprimer = $resultat->fetch_assoc();
+    executeRequete("DELETE FROM commande WHERE id_commande=$_GET[id_commande]");
+    $_GET['action'] = 'affichage';
+}
 //--------------------------------- AFFICHAGE HTML ---------------------------------//
 require_once("../inc/haut.inc.php");
 echo $contenu;

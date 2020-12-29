@@ -2,7 +2,7 @@
 //--------------------------------- TRAITEMENTS PHP ---------------------------------//
 if($_POST)
 {
-    debug($_POST);
+    // debug($_POST);
     $verif_caractere = preg_match('#^[a-zA-Z0-9._-]+$#', $_POST['pseudo']); 
     if(!$verif_caractere && (strlen($_POST['pseudo']) < 1 || strlen($_POST['pseudo']) > 255) )
     {

@@ -52,9 +52,9 @@ function creationDeLaCommande()
    }
 }
 //------------------------------------
-function ajouterTemplatetDansCommande($titre, $auteur, $id_template, $description)
+function ajouterTemplateDansCommande($titre, $id_template ,$auteur, $description)
 {
-    creationDeLaComande(); 
+    creationDeLaCommande();
     $position_template = array_search($id_template,  $_SESSION['commande']['id_template']);
     if($position_template !== false)
         
@@ -66,15 +66,7 @@ function ajouterTemplatetDansCommande($titre, $auteur, $id_template, $descriptio
     }
 }
 //------------------------------------
-function commandeTotal()
-{
-   $total = 0;
-   for($i = 0; $i < count($_SESSION['commande']['id_template']); $i++)
-   {
-      $total += $_SESSION['commande']['quantite'][$i] * $_SESSION['commande']['quantite'][$i];
-   }
-   return round($total,2); 
-}
+
 //------------------------------------
 function retirerTemplateDeLaCommande($id_template_a_supprimer)
 {

@@ -24,22 +24,21 @@ if(isset($_GET['action']) && ($_GET['action'] == 'ajout' || $_GET['action'] == '
 {
     if(isset($_GET['id_membre']))
     {
-        $resultat = executeRequete("REPLACE INTO * FROM membre WHERE id_membre=$_GET[id_membre]");
-        $produit_actuel = $resultat->fetch_assoc();
+        $resultat = executeRequete("INSERT INTO * FROM membre WHERE id_membre=$_GET[id_membre]");
+        $membre_actuel = $resultat->fetch_assoc();
     }
 }
 
     $contenu .= '<a href="?action=suppression">Supprimer votre compte</a><br><br><hr><br>';
 
-
-    if(isset($_GET['action']) && ($_GET['action']== 'suppression'))
-    {
-        if(isset($_GET['id_membre']))
-        {
-            $resultat = executeRequete("DELETE * FROM membre WHERE id_membre=$_GET[id_membre]");
-            return $resultat;
-        }
+    if(isset($_GET['action']) && $_GET['action'] == "suppression")
+    {   // $contenu .= $_GET['id_membre']
+        $resultat = executeRequete("SELECT * FROM membre WHERE id_membre=$_GET[id_membre]");
+        $profil_a_supprimer = $resultat->fetch_assoc();
+        executeRequete("DELETE * FROM membre WHERE id_membre=$_GET[id_membre]");
+        $_GET['action'] = 'affichage';
     }
+    
 //--------------------------------- AFFICHAGE HTML ---------------------------------//
 require_once("inc/haut.inc.php");
 echo $contenu;
