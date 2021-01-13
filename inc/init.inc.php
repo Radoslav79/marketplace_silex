@@ -1,17 +1,19 @@
 <?php
-//--------- BDD
+//--------- BDD -----------------
 $mysqli = new mysqli("localhost", "root", "", "marketplace_silex");
-if ($mysqli->connect_error) die('Un problème est survenu lors de la tentative de connexion à la BDD : ' . $mysqli->connect_error);
-// $mysqli->set_charset("utf8");
+if ($mysqli->connect_error) {
+    die('Un problème est survenu lors de la tentative de connexion à la BDD : ' . $mysqli->connect_error);
+    $mysqli->set_charset("utf8");
+}
  
-//--------- SESSION
+//--------- SESSION --------------------
 session_start();
  
-//--------- CHEMIN
+//--------- CHEMIN ------------------------
 define("RACINE_SITE","/marketplace_silex/");
  
-//--------- VARIABLES
+//--------- VARIABLES ----------------------
 $contenu = '';
  
-//--------- AUTRES INCLUSIONS
+//--------- AUTRES INCLUSIONS -------------------
 require_once("fonction.inc.php");

@@ -1,7 +1,10 @@
 <?php
 require_once("inc/init.inc.php");
 //--------------------------------- TRAITEMENTS PHP ---------------------------------//
-if(!internauteEstConnecte()) header("location:connexion.php");
+if(!internauteEstConnecte()) 
+{
+header("location:connexion.php");
+}
 // debug($_SESSION);
 $contenu .= '<p class="centre">Bonjour <strong>' . $_SESSION['membre']['pseudo'] . '</strong></p>';
 $contenu .= '<div class="cadre"><h2> Voici vos informations </h2>';

@@ -9,7 +9,7 @@ function executeRequete($req)
     }
     return $resultat;
 }
-//------------------------------------
+
 function debug($var, $mode = 1)
 {
     echo '<div style="background: orange; padding: 5px; float: right; clear: both; ">';
@@ -26,19 +26,27 @@ function debug($var, $mode = 1)
     }
     echo '</div>';
 }
-//------------------------------------
+
 function internauteEstConnecte()
 { 
-    if(!isset($_SESSION['membre'])) return false;
-    else return true;
+    if(!isset($_SESSION['membre'])) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
-//------------------------------------
+
 function internauteEstConnecteEtEstAuteur()
 {
-    if(internauteEstConnecte() && $_SESSION['membre']['statut'] == 1) return true;
-    else return false;
+    if(internauteEstConnecte() && $_SESSION['membre']['statut'] == 1) {
+        return true;
+    }
+    else {
+        return false;
+    } 
 }
-//------------------------------------
+
 function creationDeLaCommande()
 {
    if(!isset($_SESSION['commande']))
@@ -51,13 +59,12 @@ function creationDeLaCommande()
     
    }
 }
-//------------------------------------
+
 function ajouterTemplateDansCommande($titre, $id_template ,$auteur, $description)
 {
     creationDeLaCommande();
     $position_template = array_search($id_template,  $_SESSION['commande']['id_template']);
     if($position_template !== false)
-        
     {
         $_SESSION['commande']['titre'][] = $titre;
         $_SESSION['commande']['auteur'][] = $auteur;
@@ -65,9 +72,7 @@ function ajouterTemplateDansCommande($titre, $id_template ,$auteur, $description
         $_SESSION['commande']['description'][] = $description;
     }
 }
-//------------------------------------
 
-//------------------------------------
 function retirerTemplateDeLaCommande($id_template_a_supprimer)
 {
     $position_template = array_search($id_template_a_supprimer,  $_SESSION['commande']['id_template']);
@@ -79,4 +84,3 @@ function retirerTemplateDeLaCommande($id_template_a_supprimer)
         array_splice($_SESSION['commande']['description'], $position_produit, 1);
     }
 }
-//------------------------------------
