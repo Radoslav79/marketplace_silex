@@ -18,6 +18,8 @@ if(isset($_GET['auteur']))
     $donnees = executeRequete("SELECT * FROM template WHERE auteur='$_GET[auteur]'");  
     while($template = $donnees->fetch_assoc())
     {
+
+       var_dump($template);
         $contenu .= '<div class="marketplace-produit">';
         $contenu .= "<h2>$template[titre]</h2>";
         $contenu .= "<h2>$template[auteur]</h2>";

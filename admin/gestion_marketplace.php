@@ -29,7 +29,7 @@ if(!empty($_POST))
     }
     if(!empty($_FILES['photo']['name']))
     {   // debug($_FILES);
-        $nom_photo = $_POST['reference'] . '_' .$_FILES['photo']['name'];
+        $nom_photo = $_FILES['photo']['name'];
         $photo_bdd = RACINE_SITE . "photo/$nom_photo";
         $photo_dossier = $_SERVER['DOCUMENT_ROOT'] . RACINE_SITE . "/photo/$nom_photo"; 
         copy($_FILES['photo']['tmp_name'],$photo_dossier);
